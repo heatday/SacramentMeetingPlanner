@@ -12,8 +12,8 @@ using SacramentMeetingPlanner.Data;
 namespace SacramentMeetingPlanner.Migrations
 {
     [DbContext(typeof(SacramentMeetingPlannerContext))]
-    [Migration("20230708035017_2")]
-    partial class _2
+    [Migration("20230713050030_1")]
+    partial class _1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,32 @@ namespace SacramentMeetingPlanner.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("SacramentMeetingPlanner.Models.Hymn", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("MeetingPlannerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MeetingPlannerId");
+
+                    b.ToTable("Hymn");
+                });
 
             modelBuilder.Entity("SacramentMeetingPlanner.Models.MeetingPlanner", b =>
                 {
@@ -95,6 +121,13 @@ namespace SacramentMeetingPlanner.Migrations
                     b.ToTable("Speaker");
                 });
 
+            modelBuilder.Entity("SacramentMeetingPlanner.Models.Hymn", b =>
+                {
+                    b.HasOne("SacramentMeetingPlanner.Models.MeetingPlanner", null)
+                        .WithMany("Hymns")
+                        .HasForeignKey("MeetingPlannerId");
+                });
+
             modelBuilder.Entity("SacramentMeetingPlanner.Models.Speaker", b =>
                 {
                     b.HasOne("SacramentMeetingPlanner.Models.MeetingPlanner", null)
@@ -104,6 +137,8 @@ namespace SacramentMeetingPlanner.Migrations
 
             modelBuilder.Entity("SacramentMeetingPlanner.Models.MeetingPlanner", b =>
                 {
+                    b.Navigation("Hymns");
+
                     b.Navigation("Speakers");
                 });
 #pragma warning restore 612, 618

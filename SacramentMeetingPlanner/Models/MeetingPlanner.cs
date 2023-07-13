@@ -14,9 +14,8 @@ namespace SacramentMeetingPlanner.Models
         public string IntermediateNumber { get; set; }
         public string OpeningPrayer { get; set; }
         public string ClosingPrayer { get; set; }
-        [ForeignKey("MeetingPlannerId")]
-        public List<Speaker> Speakers { get; set; }
-        [ForeignKey("MeetingPlannerId")]
-        public List<Hymn> Hymns { get; set; }
+
+        public List<Speaker> Speakers { get; set; } = new List<Speaker>();
+        public List<Hymn> Hymns { get; set; } = new List<Hymn>();
     }
 }

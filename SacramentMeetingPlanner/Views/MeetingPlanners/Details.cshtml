@@ -1,66 +1,92 @@
 ﻿@model SacramentMeetingPlanner.Models.MeetingPlanner
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Meeting Details";
 }
 
-<h1>Details</h1>
+<div class="centered-container ">
+    <h1>Meeting Details</h1>
 
-<div>
-    <h4>MeetingPlanner</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MeetingDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MeetingDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ConductingLeader)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ConductingLeader)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OpeningSong)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OpeningSong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SacramentHymn)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SacramentHymn)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ClosingSong)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ClosingSong)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IntermediateNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IntermediateNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OpeningPrayer)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OpeningPrayer)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ClosingPrayer)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ClosingPrayer)
-        </dd>
-    </dl>
+    <div>
+        <h4>Information</h4>
+        <hr />
+        <div class="table-container ">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Meeting Date:</th>
+                    <td>@Html.DisplayFor(model => model.MeetingDate)</td>
+                </tr>
+                <tr>
+                    <th>Conducting Leader:</th>
+                    <td>@Html.DisplayFor(model => model.ConductingLeader)</td>
+                </tr>
+                <tr>
+                    <th>Opening Song:</th>
+                    <td>@Html.DisplayFor(model => model.OpeningSong)</td>
+                </tr>
+                <tr>
+                    <th>Sacrament Hymn:</th>
+                    <td>@Html.DisplayFor(model => model.SacramentHymn)</td>
+                </tr>
+                <tr>
+                    <th>Closing Song:</th>
+                    <td>@Html.DisplayFor(model => model.ClosingSong)</td>
+                </tr>
+                <tr>
+                    <th>Intermediate Number:</th>
+                    <td>@Html.DisplayFor(model => model.IntermediateNumber)</td>
+                </tr>
+                <tr>
+                    <th>Opening Prayer:</th>
+                    <td>@Html.DisplayFor(model => model.OpeningPrayer)</td>
+                </tr>
+                <tr>
+                    <th>Closing Prayer:</th>
+                    <td>@Html.DisplayFor(model => model.ClosingPrayer)</td>
+                </tr>
+                <tr>
+                    <th>Speakers:</th>
+                    <td>
+                        @foreach (var speaker in Model.Speakers)
+                        {
+                            <div>@speaker.Name - @speaker.Subject</div>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th>Hymns:</th>
+                    <td>
+                        @foreach (var hymn in Model.Hymns)
+                        {
+                            <div>@hymn.Number - @hymn.Title</div>
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <div class="centered-container ">
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit Meeting</a>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<style>
+    .centered-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .table-container {
+        background-color: #F5F5DC;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 20px;
+        border: groove;
+    }
+
+</style>

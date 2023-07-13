@@ -9,11 +9,13 @@ namespace SacramentMeetingPlanner.Data
 {
     public class SacramentMeetingPlannerContext : DbContext
     {
-        public SacramentMeetingPlannerContext (DbContextOptions<SacramentMeetingPlannerContext> options)
+        public SacramentMeetingPlannerContext(DbContextOptions<SacramentMeetingPlannerContext> options)
             : base(options)
         {
         }
 
         public DbSet<SacramentMeetingPlanner.Models.MeetingPlanner> MeetingPlanner { get; set; } = default!;
+        public DbSet<SacramentMeetingPlanner.Models.Hymn> Hymn { get; set; } = default!;
+        public DbSet<SacramentMeetingPlanner.Models.Speaker> Speaker { get; set; } = default!;
     }
 }
